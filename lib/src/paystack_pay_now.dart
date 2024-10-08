@@ -111,13 +111,18 @@ class _PaystackPayNowState extends State<PaystackPayNow> {
       var decodedRespBody = jsonDecode(response.body);
       if (decodedRespBody["data"]["gateway_response"] == "Approved" ||
           decodedRespBody["data"]["gateway_response"] == "Successful") {
-        widget.transactionCompleted();
+        //widget.transactionCompleted();
+        print("SUCCESSE");
+        Navigator.of(context).pushNamed('/lessonslist');
       } else {
-        widget.transactionNotCompleted();
+        //widget.transactionNotCompleted();
+        Navigator.of(context).pushNamed('/paystackfailed');
       }
     } else {
       /// Anything else means there is an issue
-      widget.transactionNotCompleted();
+      print("PROBLEM");
+      Navigator.of(context).pushNamed('/paystackfailed');
+      //widget.transactionNotCompleted();
       throw Exception(
           "Response Code: ${response.statusCode}, Response Body${response.body}");
     }
